@@ -1,9 +1,11 @@
+import HomePage from "./ui/templates/homePage"
+
 function App() {
 
 
   return (
     <>
-        hello world
+        <HomePage/>
     </>
   )
 }
