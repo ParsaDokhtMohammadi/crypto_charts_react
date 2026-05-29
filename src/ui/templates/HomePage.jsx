@@ -6,13 +6,12 @@ import { getCoinList } from "../../services/cryptoApi"
 const HomePage = () => {
     const [coins , setCoins] = useState([])
 useEffect(() => {
-  fetch(getCoinList())
-    .then(res => {
-      if (!res.ok) throw new Error(`HTTP ${res.status}`)
-      return res.json()
-    })
-    .then(json => setCoins(json))
-    .catch(err => console.error("Failed to fetch coins:", err))
+    const getData = async()=>{
+        const res = await fetch(getCoinList())
+        const json = await res.json()
+        setCoins(json)
+    }
+    getData()
 }, [])
     return (
         <div>
