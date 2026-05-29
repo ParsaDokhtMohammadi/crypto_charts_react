@@ -17,7 +17,7 @@ const CoinTable = ({ coins }) => {
         <tbody>
           {
             coins?.map(coin => (
-                <TableRow coin={coin}/>
+                <TableRow coin={coin} key={coin.id}/>
               ))
           }
 
@@ -33,7 +33,7 @@ export default CoinTable
 const TableRow = ({coin}) => {
   return (
     <>
-      <tr key={coin.id}>
+      <tr>
         <td>
           <div>
             <img src={coin.image} alt={coin.name} />
