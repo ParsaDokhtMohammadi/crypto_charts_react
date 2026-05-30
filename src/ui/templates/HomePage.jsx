@@ -3,6 +3,7 @@ import { useState } from "react"
 import { useEffect } from "react"
 import CoinTable from "../modules/CoinTable"
 import { getCoinList } from "../../services/cryptoApi"
+import Pagination from "../modules/pagination"
 
 const HomePage = () => {
     const [coins , setCoins] = useState([])
@@ -24,7 +25,12 @@ useEffect(() => {
 }, [])
 return (
     <div>
-        {isLoading ? <RotatingLines  strokeColor="#3874ff" strokeWidth={2}/> : <CoinTable coins={coins} />}
+        {isLoading ? <RotatingLines  strokeColor="#3874ff" strokeWidth={2}/> : (
+            <>
+            <Pagination/>
+            <CoinTable coins={coins} />
+            </>
+        )}
     </div>
 )
 }
