@@ -28,8 +28,8 @@ const HomePage = () => {
         <div>
             {isLoading ? <RotatingLines strokeColor="#3874ff" strokeWidth={2} /> : (
                 <>
-                    <Pagination page={page} setPage={setPage}/>
                     <CoinTable coins={coins} />
+                    <Pagination page={page} setPage={setPage}/>
                 </>
             )}
         </div>

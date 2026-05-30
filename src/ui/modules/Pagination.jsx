@@ -1,3 +1,4 @@
+import styles from "./Pagination.module.css"
 import { useState } from "react"
 
 const Pagination = ({page,setPage}) => {
@@ -13,19 +14,19 @@ const Pagination = ({page,setPage}) => {
 
 
     return (
-        <div>
-            <button onClick={prevHandler}>previous</button>
-            <p style={{ color: page === 1 ? "red" : "inherit" }}>1</p>
-            <p style={{ color: page === 2 ? "red" : "inherit" }}>2</p>
+        <div className={styles.pagination}>
+            <button onClick={prevHandler} className={page===1 ? styles.disabled : ""}>previous</button>
+            <p className={page===1 ? styles.selected : ""}>1</p>
+            <p className={page===2 ? styles.selected : ""}>2</p>
             {page > 2 && page < 9 && (<>
                 <span>...</span>
-                <p>{page}</p>
+                <p className={styles.selected}>{page}</p>
             </>)}
             <span>...</span>
-            <p style={{ color: page === 9 ? "red" : "inherit" }}>9</p>
-            <p style={{ color: page === 10 ? "red" : "inherit" }}>10</p>
+            <p className={page===9 ? styles.selected : ""} >9</p>
+            <p className={page===10 ? styles.selected : ""}>10</p>
 
-            <button onClick={nextHandler}>next</button>
+            <button onClick={nextHandler} className={page===10 && styles.disabled}>next</button>
         </div>
     )
 }
