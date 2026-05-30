@@ -1,7 +1,7 @@
 import { useState } from "react"
 
-const Pagination = () => {
-    const [page, setPage] = useState(1)
+const Pagination = ({page,setPage}) => {
+   
     const prevHandler = () => {
         if (page <= 1) return
         setPage((page) => page - 1)
