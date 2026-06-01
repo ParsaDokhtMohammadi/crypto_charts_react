@@ -3,30 +3,36 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { searchCoin } from '../../services/cryptoApi'
 
-const Search = ({currency,setCurrency}) => {
-    const [search , setSearch] = useState("")
-    const [searchedCoins,setSearchedCoins] = useState([])
-    useEffect(()=>{
-        if(!search)return
-        const searchCoins = async()=>{
-            const res = await fetch(searchCoin(search))
-            const json = await res.json()
-            if(json.coins) setSearchedCoins(json.coins)
-            if(json?.status===429) alert(json?.status?.error_message || "rate limit exeeded please wait")
+const Search = ({ currency, setCurrency }) => {
+    const [search, setSearch] = useState("")
+    const [searchedCoins, setSearchedCoins] = useState([])
+    const controller = new AbortController()
+    useEffect(() => {
+        if (!search) return
+        const searchCoins = async () => {
+            try {
+                const res = await fetch(searchCoin(search), { signal: controller.signal })
+                const json = await res.json()
+                if (json.coins) setSearchedCoins(json.coins)
+                if (json?.status === 429) alert(json?.status?.error_message || "rate limit exeeded please wait")
+            }catch(err){
+                if(err.name!=="AbortError") alert(err.message||"something went wrong")
             }
-           
-        searchCoins()  
-    },[search])
-  return (
-    <div>
-      <input type="text" placeholder='search' value={search} onChange={e=>setSearch(e.target.value)}/>
-      <select  value={currency} onChange={e=>setCurrency(e.target.value)}>
-        <option value="usd">USD</option>
-        <option value="eur">EUR</option>
-        <option value="jpy">JPY</option>
-      </select>
-    </div>
-  )
+        }
+
+        searchCoins()
+        return () => controller.abort()
+    }, [search])
+    return (
+        <div>
+            <input type="text" placeholder='search' value={search} onChange={e => setSearch(e.target.value)} />
+            <select value={currency} onChange={e => setCurrency(e.target.value)}>
+                <option value="usd">USD</option>
+                <option value="eur">EUR</option>
+                <option value="jpy">JPY</option>
+            </select>
+        </div>
+    )
 }
 
 export default Search

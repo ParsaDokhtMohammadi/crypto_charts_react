@@ -20,6 +20,7 @@ const HomePage = () => {
                 setCoins(json)
             } catch (err) {
                 console.error("Failed to fetch coins:", err)
+                alert(err.message||"faild to fetch coins")
             } finally {
                 setIsLoading(false)
             }
