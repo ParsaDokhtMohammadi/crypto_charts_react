@@ -30,7 +30,7 @@ const HomePage = () => {
         <div>
             {isLoading ? <RotatingLines strokeColor="#3874ff" strokeWidth={2} /> : (
                 <>
-                    <Search currency={currency} setCurrency={setCurrency}/>
+                    <Search  currency={currency} setCurrency={setCurrency}/>
                     <CoinTable coins={coins} />
                     <Pagination page={page} setPage={setPage}/>
                 </>

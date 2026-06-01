@@ -5,3 +5,7 @@ const baseUrl = "https://api.coingecko.com/api/v3"
 export const getCoinList = (page=1,currency="usd") => {
 return `${baseUrl}/coins/markets?vs_currency=${currency}&per_page=20&page=${page}&x_cg_demo_api_key=${apiKey}`
 }
+
+export const searchCoin = (query="")=>{
+    return `${baseUrl}/search?query=${query}&x_cg_demo_api_key=${apiKey}`
+}
