@@ -26,7 +26,7 @@ const Pagination = ({page,setPage}) => {
             <p className={page===9 ? styles.selected : ""} >9</p>
             <p className={page===10 ? styles.selected : ""}>10</p>
 
-            <button onClick={nextHandler} className={page===10 && styles.disabled}>next</button>
+            <button onClick={nextHandler} className={page===10 ? styles.disabled :""}>next</button>
         </div>
     )
 }

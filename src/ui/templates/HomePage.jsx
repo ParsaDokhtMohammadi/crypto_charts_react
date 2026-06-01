@@ -4,15 +4,17 @@ import { useEffect } from "react"
 import CoinTable from "../modules/CoinTable"
 import { getCoinList } from "../../services/cryptoApi"
 import Pagination from "../modules/pagination"
+import Search from "../modules/Search"
 
 const HomePage = () => {
     const [coins, setCoins] = useState([])
     const [page, setPage] = useState(1)
+    const [currency,setCurrency] = useState("USD")
     const [isLoading, setIsLoading] = useState(true)
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await fetch(getCoinList(page))
+                const res = await fetch(getCoinList(page,currency))
                 if (!res.ok) throw new Error(`HTTP error: ${res.status}`)
                 const json = await res.json()
                 setCoins(json)
@@ -23,11 +25,12 @@ const HomePage = () => {
             }
         }
         getData()
-    }, [page])
+    }, [page,currency])
     return (
         <div>
             {isLoading ? <RotatingLines strokeColor="#3874ff" strokeWidth={2} /> : (
                 <>
+                    <Search currency={currency} setCurrency={setCurrency}/>
                     <CoinTable coins={coins} />
                     <Pagination page={page} setPage={setPage}/>
                 </>
