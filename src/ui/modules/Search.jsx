@@ -8,6 +8,7 @@ const Search = ({ currency, setCurrency }) => {
     const [searchedCoins, setSearchedCoins] = useState([])
     const controller = new AbortController()
     useEffect(() => {
+        setSearchedCoins([])
         if (!search) return
         const searchCoins = async () => {
             try {
@@ -31,6 +32,14 @@ const Search = ({ currency, setCurrency }) => {
                 <option value="eur">EUR</option>
                 <option value="jpy">JPY</option>
             </select>
+            <div>
+                <ul>
+                    {searchedCoins.map(coin=>(<li key={coin.id}>
+                        <img src={coin.thumb} alt={coin.name} />
+                        <p>{coin.name}</p>
+                    </li>))}
+                </ul>
+            </div>
         </div>
     )
 }
