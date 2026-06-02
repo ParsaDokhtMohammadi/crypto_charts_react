@@ -55,7 +55,7 @@ export default Chart
 
 const ChartComponent = ({ data, type }) => {
     return (
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="100%" height="330">
             <LineChart data={data}>
                 <CartesianGrid stroke='#404042' />
                 <Line type='monotone' dataKey={type} stroke='#3874ff' strokeWidth={2} />

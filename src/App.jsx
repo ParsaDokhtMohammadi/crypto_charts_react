@@ -1,3 +1,4 @@
+import Layout from "./ui/Layout"
 import HomePage from "./ui/templates/homePage"
 
 function App() {
@@ -5,7 +6,9 @@ function App() {
 
   return (
     <>
-        <HomePage/>
+        <Layout>
+          <HomePage/>
+        </Layout>
     </>
   )
 }

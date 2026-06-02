@@ -1,6 +1,5 @@
-export const convertData = (data,type) => {
-    const convertedData = data[type].map(item=>{
-        return {date:item[0],[type]:item[1].toFixed(2)}
-    })
-    return convertedData
+export const convertData = (data, type) => {
+    return data[type]
+        .filter((_, i) => i % 4 === 0)
+        .map(item => ({ date: item[0], [type]: parseFloat(item[1].toFixed(2)) }))
 }
