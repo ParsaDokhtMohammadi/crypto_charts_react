@@ -3,7 +3,7 @@ import { useState } from "react"
 import { useEffect } from "react"
 import CoinTable from "../modules/CoinTable"
 import { getCoinList } from "../../services/cryptoApi"
-import Pagination from "../modules/pagination"
+import Pagination from "../modules/Pagination"
 import Search from "../modules/Search"
 import Chart from "../modules/Chart"
 
