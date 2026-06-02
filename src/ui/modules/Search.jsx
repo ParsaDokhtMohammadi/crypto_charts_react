@@ -2,26 +2,33 @@ import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { searchCoin } from '../../services/cryptoApi'
+import { RotatingLines } from 'react-loader-spinner'
 
 const Search = ({ currency, setCurrency }) => {
     const [search, setSearch] = useState("")
     const [searchedCoins, setSearchedCoins] = useState([])
+    const [isLoading, setIsloading] = useState(false)
     const controller = new AbortController()
     useEffect(() => {
+        setIsloading(true)
         setSearchedCoins([])
-        if (!search) return
+        if (!search) {
+            setIsloading(false)
+            return
+        }
         const searchCoins = async () => {
             try {
                 const res = await fetch(searchCoin(search), { signal: controller.signal })
                 const json = await res.json()
                 if (json.coins) setSearchedCoins(json.coins)
                 if (json?.status === 429) alert(json?.status?.error_message || "rate limit exeeded please wait")
-            }catch(err){
-                if(err.name!=="AbortError") alert(err.message||"something went wrong")
+                setIsloading(false)
+            } catch (err) {
+                if (err.name !== "AbortError") alert(err.message || "something went wrong")
             }
         }
-
         searchCoins()
+
         return () => controller.abort()
     }, [search])
     return (
@@ -33,8 +40,9 @@ const Search = ({ currency, setCurrency }) => {
                 <option value="jpy">JPY</option>
             </select>
             <div>
+                {isLoading && <RotatingLines width={"50px"} height={"50px"} strokeWidth={"2px"} strokeColor='#3874ff' />}
                 <ul>
-                    {searchedCoins.map(coin=>(<li key={coin.id}>
+                    {searchedCoins.map(coin => (<li key={coin.id}>
                         <img src={coin.thumb} alt={coin.name} />
                         <p>{coin.name}</p>
                     </li>))}
