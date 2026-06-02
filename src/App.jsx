@@ -1,5 +1,5 @@
 import Layout from "./ui/Layout"
-import HomePage from "./ui/templates/homePage"
+import HomePage from "./ui/templates/HomePage"
 
 function App() {
 
