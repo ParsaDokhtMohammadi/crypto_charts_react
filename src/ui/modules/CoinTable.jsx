@@ -40,7 +40,7 @@ const TableRow = ({coin , setChart}) => {
     try{
       const res = await fetch(marketChart(coin.id))
       const json = await res.json()
-      setChart(json)
+      setChart({...json , coin})
     }catch(err){
       setChart(null)
       console.log(err)
