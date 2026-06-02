@@ -7,6 +7,14 @@ import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, X
 const Chart = ({ chart, setChart }) => {
     const [type, setType] = useState("prices")
     const data = convertData(chart, type)
+
+    const typeHandler = (e)=> {
+
+        if(e.target.tagName==="BUTTON"){
+            setType(e.target.value)
+        }
+    }
+
     return (
         <div className={styles.container}>
             <span className={styles.cross} onClick={() => setChart(null)}>X</span>
@@ -18,10 +26,10 @@ const Chart = ({ chart, setChart }) => {
                 <div className={styles.graph}>
                     <ChartComponent data={data} type={type} />
                 </div>
-                <div className={styles.types}>
-                    <button>Prices</button>
-                    <button>Market Cap</button>
-                    <button>Total Volumes</button>
+                <div className={styles.types} onClick={typeHandler}>
+                    <button className={type==="prices" ? styles.selected : null} value={"prices"}>Prices</button>
+                    <button className={type==="market_caps" ? styles.selected : null} value={"market_caps"}>Market Caps</button>
+                    <button className={type==="total_volumes" ? styles.selected : null} value={"total_volumes"}>Total Volumes</button>
                 </div>
                 <div className={styles.details}>
                     <div>
