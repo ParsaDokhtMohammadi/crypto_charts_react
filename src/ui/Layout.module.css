@@ -1,4 +1,4 @@
-header {
+.header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -9,7 +9,7 @@ header {
 }
 
 
-footer {
+.footer {
     text-align: center;
     background-color: #3874ff;
     padding: 20px;
@@ -17,7 +17,7 @@ footer {
     border-radius: 10px;
 }
 
-footer a , header a {
+.footer a , .header a {
     text-decoration: none;
     color: black;
     font-weight: 600;
