@@ -1,6 +1,7 @@
 import chartUp from "../../assets/chart-up.svg"
 import chartDown from "../../assets/chart-down.svg"
 import styles from "./CoinTable.module.css"
+import { marketChart } from "../../services/cryptoApi"
 
 
 const CoinTable = ({ coins , setChart }) => {
@@ -35,8 +36,15 @@ export default CoinTable
 
 
 const TableRow = ({coin , setChart}) => {
-  const showHandler = () => {
-    setChart(true)
+  const showHandler = async() => {
+    try{
+      const res = await fetch(marketChart(coin.id))
+      const json = await res.json()
+      setChart(json)
+    }catch(err){
+      setChart(null)
+      console.log(err)
+    }
   }
   return (
     <>

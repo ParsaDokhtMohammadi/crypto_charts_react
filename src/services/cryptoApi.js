@@ -9,3 +9,7 @@ return `${baseUrl}/coins/markets?vs_currency=${currency}&per_page=20&page=${page
 export const searchCoin = (query="")=>{
     return `${baseUrl}/search?query=${query}&x_cg_demo_api_key=${apiKey}`
 }
+
+export const marketChart = (coin) => {
+    return `${baseUrl}/coins/${coin}/market_chart?vs_currency=usd&days=7&x_cg_demo_api_key=${apiKey}`
+}
