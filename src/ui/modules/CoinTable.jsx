@@ -3,7 +3,7 @@ import chartDown from "../../assets/chart-down.svg"
 import styles from "./CoinTable.module.css"
 
 
-const CoinTable = ({ coins }) => {
+const CoinTable = ({ coins , setChart }) => {
   return (
     <div className={styles.container}>
       <table className={styles.table}>
@@ -20,7 +20,7 @@ const CoinTable = ({ coins }) => {
         <tbody>
           {
             coins?.map(coin => (
-                <TableRow coin={coin} key={coin.id}/>
+                <TableRow coin={coin} key={coin.id} setChart={setChart}/>
               ))
           }
 
@@ -33,10 +33,14 @@ const CoinTable = ({ coins }) => {
 export default CoinTable
 
 
-const TableRow = ({coin}) => {
+
+const TableRow = ({coin , setChart}) => {
+  const showHandler = () => {
+    setChart(true)
+  }
   return (
     <>
-      <tr>
+      <tr onClick={showHandler}>
         <td>
           <div className={styles?.symbol}>
             <img src={coin?.image} alt={coin?.name} />
