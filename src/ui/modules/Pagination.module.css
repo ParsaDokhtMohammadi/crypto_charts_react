@@ -1,13 +1,14 @@
 .pagination {
-    width: 400px;
+    width: 100%;
+    gap: 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    margin: 40px auto 100px;
+    margin: 40px 0 100px;
 }
 
 .pagination button {
-    width: 80px;
+    
     background-color: #3874ff;
     color: white;
     border: none;
